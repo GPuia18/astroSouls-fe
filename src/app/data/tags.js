@@ -1,0 +1,17 @@
+export const tags = [
+  "GAMER",
+  "ARTISTIC",
+  "MOVIE_BUFF",
+  "GYMBRO",
+  "MUSIC_LOVER",
+  "TRAVELER",
+  "NATURE_LOVER",
+  "EXTROVERT",
+  "ADVENTUROUS",
+  "FOODIE",
+  "RELIGIOUS",
+  "BOOKWORM",
+  "INTROVERT",
+  "TECH_ENTHUSIAST",
+  "ANIMAL_LOVER",
+];
