@@ -31,7 +31,7 @@ import { GetStaticProps } from "next";
 
 const Chats = () => {
   const userData = JSON.parse(localStorage.getItem("userData")) || null;
-  const matchedUsers = JSON.parse(localStorage.getItem("matchedUsers")) || null;
+  const matchedUsers = JSON.parse(localStorage.getItem("matchedUsers")) || [];
   const messages = JSON.parse(localStorage.getItem("messages")) || null;
   const username = JSON.parse(localStorage.getItem("username")) || null;
 
@@ -46,11 +46,12 @@ const Chats = () => {
   //const [newMessage, setNewMessage] = useState("");
 
   const [showPeople, setShowPeople] = useState(false);
+  const [serchedUsers, setSearchedUsers] = useState([]);
 
   const [userNr, setUserNr] = useState(0);
   localStorage.setItem(
     "chosenUsername",
-    JSON.stringify(matchedUsers[userNr].username)
+    JSON.stringify(matchedUsers != null ? matchedUsers[userNr]?.username : null)
   );
 
   const showHidePeople = () => {
@@ -73,6 +74,10 @@ const Chats = () => {
   var usersStatic = [];
   var messagesStatic = [];
 
+  const setSearchedUsersValue = (result) => {
+    setSearchedUsers(result);
+  };
+
   return (
     <div className="landing-back">
       <Notification text={notificationText}></Notification>
@@ -91,24 +96,31 @@ const Chats = () => {
           main={true}
           profile={true}
         ></Header>
-        <div className="chats">
-          <div className="show-btn" onClick={showHidePeople}>
-            {showPeople ? "Hide" : "Show"}
+        {matchedUsers.length === 0 ? (
+          <div className="chats">No matched users</div>
+        ) : (
+          <div className="chats">
+            <div className="show-btn" onClick={showHidePeople}>
+              {showPeople ? "Hide" : "Show"}
+            </div>
+            <div className="chats-people" id="chats-people">
+              <Search
+                setResult={setSearchedUsersValue}
+                users={matchedUsers}
+              ></Search>
+              <FriendsChooseList
+                users={serchedUsers.length === 0 ? matchedUsers : serchedUsers}
+                setUserChatValue={setUserChatValue}
+              ></FriendsChooseList>
+            </div>
+            <div className="chats-chosen">
+              <ChosenChat
+                user={matchedUsers[userNr].username}
+                currentUserMessages={messages}
+              ></ChosenChat>
+            </div>
           </div>
-          <div className="chats-people" id="chats-people">
-            <Search></Search>
-            <FriendsChooseList
-              users={matchedUsers}
-              setUserChatValue={setUserChatValue}
-            ></FriendsChooseList>
-          </div>
-          <div className="chats-chosen">
-            <ChosenChat
-              user={matchedUsers[userNr].username}
-              currentUserMessages={messages}
-            ></ChosenChat>
-          </div>
-        </div>
+        )}
       </div>
       <Image
         src="/Stea.png"

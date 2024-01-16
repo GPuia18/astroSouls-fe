@@ -84,3 +84,25 @@ export const postCallWithAuth = async (endpoint, data, token) => {
     throw error;
   }
 };
+
+export const putCallWithAuth = async (endpoint, data, token) => {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/${endpoint}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      },
+      { cache: "no-store" }
+    );
+    return handleResponse(response);
+  } catch (error) {
+    console.error("Error in POST request:", error);
+    throw error;
+  }
+};

@@ -2,32 +2,26 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
-export default function PhotoCarousel({ username, nrPics }) {
-  const [picNr, setPicNr] = useState(1);
-  const [picName, setPicName] = useState(
-    nrPics > 0 ? "/" + username + "-" + picNr + ".png" : "/test-1.png"
-  );
-  const maxPicNr = nrPics > 0 ? nrPics : 1;
+export default function PhotoCarousel({ images }) {
+  const [picNr, setPicNr] = useState(0);
+
+  const maxPicNr = images.length;
 
   const picNrBack = () => {
-    if (picNr > 1) {
+    if (picNr > 0) {
       setPicNr(picNr - 1);
     } else {
-      setPicNr(maxPicNr);
+      setPicNr(maxPicNr - 1);
     }
   };
 
   const picNrNext = () => {
-    if (picNr < maxPicNr) {
+    if (picNr < maxPicNr - 1) {
       setPicNr(picNr + 1);
     } else {
-      setPicNr(1);
+      setPicNr(0);
     }
   };
-
-  const changePicName = useEffect(() => {
-    setPicName("/" + username + "-" + picNr + ".png");
-  }, [picNr]);
 
   return (
     <div className="carousel">
@@ -41,9 +35,25 @@ export default function PhotoCarousel({ username, nrPics }) {
           className="cursor-pointer"
         ></Image>
       </div>
-      <div className="carousel-pic">
-        <Image src={picName} width={300} height={300} alt="Profile pic"></Image>
-      </div>
+      {images.length === 0 ? (
+        <div className="carousel-pic">
+          <Image
+            src={"/anonym.png"}
+            width={300}
+            height={300}
+            alt="Profile pic"
+          ></Image>
+        </div>
+      ) : (
+        <div className="carousel-pic">
+          <Image
+            src={`/uploads/${images[picNr]}`}
+            width={300}
+            height={300}
+            alt="Profile pic"
+          ></Image>
+        </div>
+      )}
       <div className="pic-btn">
         <Image
           src={"/next.png"}

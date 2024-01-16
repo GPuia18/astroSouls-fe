@@ -79,7 +79,6 @@ nav div {
 
 .content-landing,
 .content-login,
-.content-register,
 .main,
 .content-main,
 .chats-people,
@@ -95,11 +94,15 @@ nav div {
   border-radius: 15px;
 }
 
-.main,
-.content-main {
-  width: 100%;
-  height: 100%;
-  padding: 0px;
+.content-register {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 70%;
+  height: 80%;
+  border: 2px solid black;
+  border-radius: 15px;
 }
 
 .content-landing {
@@ -109,6 +112,8 @@ nav div {
 .main {
   border: none;
   height: 100%;
+  display: flex;
+  justify-content: center;
   padding: 10px 0px;
 }
 
@@ -118,6 +123,8 @@ nav div {
   justify-content: space-between;
   gap: 10px;
   padding: 10px 10px;
+  height: 90%;
+  overflow-y: auto;
 }
 
 .content-login,
@@ -205,27 +212,53 @@ nav div {
   padding: 10px;
 }
 
+.chat-header {
+  justify-content: space-between;
+}
+
 .chats-send {
   justify-content: space-between;
   position: relative;
 }
 
-.upload-file-container {
-  position: absolute;
+.upload-file-container,
+.upload-file-container-profile {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
-  padding: 10px;
+  width: fit-content;
+  border-radius: 10px;
+  border-collapse: collapse;
+}
+
+.upload-file-container {
+  position: absolute;
   left: 0;
   top: 0;
-  width: fit-content;
-  border: 2px solid black;
-  border-radius: 10px;
+  justify-content: flex-start;
   transform: translateY(-110%);
-  border-collapse: collapse;
   backdrop-filter: blur(3px);
+  border: 2px solid black;
+  padding: 10px;
+}
+
+.upload-file-container-profile {
+  gap: 10px;
+  flex-direction: column;
+  align-content: center;
+}
+
+.upload-file-container-profile form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.upload-file-container-profile form input {
+  padding: 5px;
+  height: 40px;
 }
 
 .upload-file-container form input {
@@ -281,7 +314,7 @@ nav div {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   height: auto;
   width: auto;
   gap: 10px;
@@ -448,7 +481,7 @@ textarea::placeholder {
 }
 
 input[type="range"] {
-  width: 180px;
+  width: 160px;
   accent-color: #7e74b1;
 }
 
@@ -578,7 +611,6 @@ textarea {
 }
 
 .main-tags {
-  width: 50%;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -602,6 +634,8 @@ textarea {
   gap: 10px;
   flex-direction: row;
   flex-wrap: nowrap;
+  height: 275px;
+  width: 275px;
 }
 
 .carousel-pic {
@@ -611,6 +645,28 @@ textarea {
 
 .carousel-pic img {
   border-radius: 15px;
+}
+
+.more-info-user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.profile-pics {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.small-pic {
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
 .show-btn {
@@ -649,6 +705,43 @@ textarea {
 
 .search-input::placeholder::after {
   position: absolute;
+}
+
+.products {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 150px;
+  height: 250px;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.button-buy,
+.button-ban {
+  width: 90%;
+  height: 30px;
+  font-size: 16px;
+  text-align: center;
+  background-color: #c787ac;
+  border: 2px solid black;
+  border-radius: 20px;
+}
+
+.button-ban {
+  width: 100px;
+  background-color: #7e74b1;
 }
 
 @media screen and (max-width: 1000px) {
@@ -769,7 +862,7 @@ textarea {
   }
 
   .main-tags {
-    width: 100%;
+    width: 200px;
     justify-content: space-between;
   }
 
@@ -786,8 +879,7 @@ textarea {
 
 @media screen and (max-width: 400px) {
   .content-landing,
-  .content-login,
-  .content-register {
+  .content-login {
     width: 90%;
     justify-content: space-around;
   }

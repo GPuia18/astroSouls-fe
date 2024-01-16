@@ -94,7 +94,7 @@ const LoginPage = () => {
 
       handleSetUserData(userData, matchedUsers, username, messages);
 
-      //router.push("/chats");
+      router.push("/main");
     } else {
       setNotificationText("All fields must be completed before submitting!");
       document.getElementById("notification").style.display = "flex";

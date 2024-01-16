@@ -2,10 +2,12 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { postCallWithAuth } from "./FetchData";
 import { io } from "socket.io-client";
+import { useRouter } from "next/navigation";
 
 const socket = io("http://localhost:3001"); // Replace with your server URL
 
 export default function ChosenChat({ user, currentUserMessages }) {
+  const router = useRouter();
   const allMessages = JSON.parse(localStorage.getItem("messages")) || null;
   const username = JSON.parse(localStorage.getItem("username")) || null;
   const userData = JSON.parse(localStorage.getItem("userData")) || null;
@@ -221,18 +223,51 @@ export default function ChosenChat({ user, currentUserMessages }) {
     }
   };
 
+  const blockUser = async () => {
+    try {
+      const data = await postCallWithAuth(
+        "api/users/block",
+        { search: JSON.parse(localStorage.getItem("chosenUsername")) },
+        userData.token
+      );
+      console.log(data);
+      const chosenUsername = JSON.parse(localStorage.getItem("chosenUsername"));
+      const filteredUsers = matchedUsers.filter(
+        (user) => user.username != chosenUsername
+      );
+      console.log(filteredUsers);
+      localStorage.setItem("matchedUsers", JSON.stringify(filteredUsers));
+      router.push("/main");
+      // setMatchedUsers(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return user && user !== "" ? (
     <>
       <div className="chat-header">
+        <div className="flex flex-row gap-2">
+          <a href={`/user/${user}`}>
+            <Image
+              src={"/profile-pic-mock.png"}
+              width={30}
+              height={30}
+              alt="profile"
+            ></Image>
+          </a>
+          <div className="chats-user-info">
+            <span className="font-semibold text-xl">{user}</span>
+          </div>
+        </div>
         <Image
-          src={"/profile-pic-mock.png"}
+          src={"/block.png"}
+          alt="block"
           width={30}
           height={30}
-          alt="profile"
+          className="cursor-pointer"
+          onClick={blockUser}
         ></Image>
-        <div className="chats-user-info">
-          <span className="font-semibold text-xl">{user}</span>
-        </div>
       </div>
       <div className="chat-body">
         {messages.map((message, index) =>
