@@ -39,7 +39,7 @@ const RegisterPage = () => {
   const [genderValueF, setGenderValueF] = useState(false);
   const [genderValueO, setGenderValueO] = useState(false);
 
-  const [height, setHeight] = useState();
+  const [height, setHeight] = useState("");
 
   const [chosenNationality, setChosenNationality] = useState("");
 
@@ -158,7 +158,7 @@ const RegisterPage = () => {
     localStorage.setItem("username", JSON.stringify(username));
     localStorage.setItem("matchedUsers", JSON.stringify([]));
     localStorage.setItem("messages", JSON.stringify([]));
-    localStorage.setItem("userDataExtended", JSON.stringify("REGULAR"));
+    localStorage.setItem("userDataExtended", JSON.stringify(data.astroUser));
   };
 
   const makeRegisterCall = async () => {
@@ -248,6 +248,11 @@ const RegisterPage = () => {
     }
   };
 
+  const minDate = new Date();
+  minDate.setFullYear(minDate.getFullYear() - 18);
+
+  const minDateFormatted = minDate.toISOString().split("T")[0];
+
   return (
     <div className="landing-back">
       <Notification text={notificationText}></Notification>
@@ -336,7 +341,10 @@ const RegisterPage = () => {
         ></SecondaryButton>
         <div className="flex flex-row flex-wrap step-content justify-center">
           <div className="register-form register-step-form">
-            <Birthday action={setBirthDateValue}></Birthday>
+            <Birthday
+              action={setBirthDateValue}
+              max={minDateFormatted}
+            ></Birthday>
 
             <Gender
               genderValueM={genderValueM}

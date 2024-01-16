@@ -615,8 +615,10 @@ textarea {
   flex-direction: row;
   flex-wrap: nowrap;
   overflow-y: auto;
-  justify-content: space-around;
+  justify-content: flex-start;
   gap: 10px;
+  max-width: 70%;
+  padding: 5px 10px;
 }
 
 .main-tags .tag {
@@ -721,7 +723,7 @@ textarea {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 150px;
+  width: 200px;
   height: 250px;
   border: 2px solid black;
   border-radius: 10px;
@@ -816,7 +818,15 @@ textarea {
     justify-content: space-around;
   }
 
+  .content-register {
+    width: 80%;
+  }
+
   .content-main {
+    width: 90%;
+  }
+
+  .main {
     width: 90%;
   }
 
@@ -883,9 +893,18 @@ textarea {
     width: 90%;
     justify-content: space-around;
   }
+
   .upload-file-container form input {
     width: fit-content;
     max-width: 200px;
     color: white;
+  }
+
+  .main {
+    width: 100%;
+  }
+
+  .content-register {
+    width: 90%;
   }
 }

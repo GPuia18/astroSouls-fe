@@ -5,7 +5,9 @@ export default function Header({ logo, premium, chat, main, profile }) {
     <nav id="nav">
       <div>
         {logo ? (
-          <Image src="/LogoCuExtra.png" width={150} height={150} alt="Logo" />
+          <a href="/">
+            <Image src="/LogoCuExtra.png" width={150} height={150} alt="Logo" />
+          </a>
         ) : (
           <></>
         )}
