@@ -95,10 +95,11 @@ export default function ChosenChat({ user, currentUserMessages }) {
           ];
         }
       });
+      const userNow = JSON.parse(localStorage.getItem("chosenUsername"));
       console.log("set the message in array", allMessages);
       if (!found) {
         allMessages.push({
-          username: message.receiver,
+          username: userNow,
           messages: [
             {
               senderUsername: message.sender,
@@ -111,7 +112,7 @@ export default function ChosenChat({ user, currentUserMessages }) {
         });
       }
       if (message.sender === username) {
-        if (message.image === null) {
+        if (message.image == null) {
           sendMessageToBE({
             content: message.content,
             receiver: message.receiver,
@@ -128,10 +129,10 @@ export default function ChosenChat({ user, currentUserMessages }) {
       }
       localStorage.setItem("messages", JSON.stringify(allMessages));
       console.log("setted the messages in local");
-      const userNow = JSON.parse(localStorage.getItem("chosenUsername"));
       setMessages(() => {
         var m = [];
         allMessages.forEach((element) => {
+          console.log(element);
           if (element.username === userNow) {
             console.log("obiect gasit pentru setMessages", element);
             m = element.messages;
