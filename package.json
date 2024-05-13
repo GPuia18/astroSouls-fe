@@ -15,7 +15,7 @@
     "date-fns": "^3.1.0",
     "horoscope": "^2.0.1",
     "jsonwebtoken": "^9.0.2",
-    "next": "14.0.3",
+    "next": "14.1.1",
     "primeicons": "^6.0.1",
     "primereact": "^10.3.0",
     "rc-slider": "^10.5.0",
